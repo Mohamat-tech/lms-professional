@@ -1,0 +1,7 @@
+composer.json
+*.min.js
+*.min.css
+node_modules/
+vendor/
+.env.local
+.env.*.local

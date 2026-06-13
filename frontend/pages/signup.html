@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LMS Sophisti qué - Créer un compte">
+    <meta name="theme-color" content="#0066FF">
+    <title>LMS - Inscription</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <style>
+        .signup-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--gradient-cool);
+            padding: var(--spacing-lg);
+        }
+
+        .signup-card {
+            background: var(--bg-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideInUp var(--transition-base);
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .signup-header .logo {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .signup-header h1 {
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .signup-header p {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .password-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-group input {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: var(--spacing-md);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: var(--font-size-lg);
+        }
+
+        .accept-terms {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .accept-terms input[type="checkbox"] {
+            width: auto;
+            margin-top: 4px;
+            cursor: pointer;
+        }
+
+        .accept-terms label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+        }
+
+        .accept-terms a {
+            color: var(--primary-blue);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: var(--spacing-md) var(--spacing-lg);
+            font-size: var(--font-size-md);
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-lg);
+            background: var(--gradient-warm);
+            color: white;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 51, 51, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .login-link p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .login-link a {
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-credit {
+            text-align: center;
+            margin-top: var(--spacing-2xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        @media (max-width: 767px) {
+            .signup-container {
+                min-height: auto;
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+
+            .signup-card {
+                padding: var(--spacing-lg);
+            }
+
+            .signup-header .logo {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-card">
+            <div class="signup-header">
+                <div class="logo">✨</div>
+                <h1>S'inscrire</h1>
+                <p>Rejoignez notre communauté d'apprentissage</p>
+            </div>
+
+            <form class="auth-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Prénom</label>
+                        <input
+                            type="text"
+                            id="firstName"
+                            name="firstName"
+                            placeholder="Jean"
+                            required
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Nom</label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                            placeholder="Dupont"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group form-row full">
+                    <label for="email">Adresse Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="votre@email.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group form-row full">
+                    <label for="userType">Type d'utilisateur</label>
+                    <select id="userType" name="userType" required>
+                        <option value="">Sélectionner...</option>
+                        <option value="student">Étudiant</option>
+                        <option value="professor">Professeur</option>
+                        <option value="admin">Administrateur</option>
+                    </select>
+                </div>
+
+                <div class="form-group form-row full">
+                    <label for="password">Mot de passe</label>
+                    <div class="password-group">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="••••••••"
+                            required
+                        >
+                        <button type="button" class="password-toggle">👁️</button>
+                    </div>
+                </div>
+
+                <div class="form-group form-row full">
+                    <label for="confirmPassword">Confirmer mot de passe</label>
+                    <div class="password-group">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="••••••••"
+                            required
+                        >
+                        <button type="button" class="password-toggle">👁️</button>
+                    </div>
+                </div>
+
+                <div class="accept-terms">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">
+                        Je l'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Créer mon compte
+                </button>
+            </form>
+
+            <div class="login-link">
+                <p>Vous avez déjà un compte? <a href="login.html">Se connecter</a></p>
+            </div>
+
+            <div class="footer-credit">
+                LMS développé par NDAOBA MOHAMAT 24G2687
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/ui-utils.js"></script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LMS Professionnel - Mes Cours">
+    <meta name="theme-color" content="#0066FF">
+    <title>LMS - Mes Cours</title>
+
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <style>
+        .courses-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+
+        .courses-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+        }
+
+        .search-bar {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: var(--spacing-md);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .filter-options {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            background: transparent;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .full-course-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-base);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px var(--shadow);
+        }
+
+        .course-banner {
+            height: 200px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+        }
+
+        .course-content {
+            padding: var(--spacing-lg);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-meta {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .course-title {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+
+        .course-professor {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .course-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin: var(--spacing-md) 0;
+            padding: var(--spacing-md) 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .course-progress {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .course-footer {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: auto;
+        }
+
+        .course-footer button {
+            flex: 1;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-continue {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-continue:hover {
+            opacity: 0.9;
+        }
+
+        .btn-details {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-details:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        @media (max-width: 767px) {
+            .courses-header {
+                flex-direction: column;
+            }
+
+            .search-bar {
+                width: 100%;
+                min-width: 100%;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .course-banner {
+                height: 150px;
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container flex">
+            <div class="logo">🎓 LMS Pro</div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="dashboard.html">Tableau de bord</a></li>
+                <li><a href="#courses" class="active">Cours</a></li>
+                <li><a href="evaluation.html">Évaluations</a></li>
+            </ul>
+            <button class="theme-toggle">🌙</button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="courses-container">
+        <div class="courses-header">
+            <div>
+                <h1>Mes Cours</h1>
+                <p style="color: var(--text-secondary);">Consultez et gérez vos cours</p>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Rechercher un cours...">
+                <button class="btn btn-primary btn-sm">🔍</button>
+            </div>
+        </div>
+
+        <div style="margin-bottom: var(--spacing-xl);">
+            <h3 style="margin-bottom: var(--spacing-md);">Filtrer par</h3>
+            <div class="filter-options">
+                <button class="filter-btn active">Tous</button>
+                <button class="filter-btn">En cours</button>
+                <button class="filter-btn">Complétés</button>
+                <button class="filter-btn">Recommandés</button>
+            </div>
+        </div>
+
+        <!-- Courses Grid -->
+        <div class="courses-grid">
+            <!-- Course Card 1 -->
+            <div class="full-course-card">
+                <div class="course-banner">
+                    📖
+                    <div class="course-badge">65% Complété</div>
+                </div>
+                <div class="course-content">
+                    <div class="course-meta">Niveau L2 • 8 semaines</div>
+                    <h3 class="course-title">Introduction à Python</h3>
+                    <p class="course-professor">Prof. Jean Dupont</p>
+
+                    <div class="course-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">12/18</div>
+                            <div class="stat-label">Modules</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">42h</div>
+                            <div class="stat-label">Temps</div>
+                        </div>
+                    </div>
+
+                    <div class="course-progress">
+                        <div class="progress-label">
+                            <span>Progression</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 65%"></div>
+                        </div>
+                    </div>
+
+                    <div class="course-footer">
+                        <button class="btn-continue">Continuer</button>
+                        <button class="btn-details">Détails</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Card 2 -->
+            <div class="full-course-card">
+                <div class="course-banner" style="background: linear-gradient(135deg, #FF3333, #FF3399);">
+                    💻
+                    <div class="course-badge">42% Complété</div>
+                </div>
+                <div class="course-content">
+                    <div class="course-meta">Niveau L2 • 10 semaines</div>
+                    <h3 class="course-title">Développement Web</h3>
+                    <p class="course-professor">Prof. Marie Martin</p>
+
+                    <div class="course-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">8/19</div>
+                            <div class="stat-label">Modules</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">35h</div>
+                            <div class="stat-label">Temps</div>
+                        </div>
+                    </div>
+
+                    <div class="course-progress">
+                        <div class="progress-label">
+                            <span>Progression</span>
+                            <span>42%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 42%"></div>
+                        </div>
+                    </div>
+
+                    <div class="course-footer">
+                        <button class="btn-continue">Continuer</button>
+                        <button class="btn-details">Détails</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Card 3 -->
+            <div class="full-course-card">
+                <div class="course-banner" style="background: linear-gradient(135deg, #00CC44, #CCFF00);">
+                    🎓
+                    <div class="course-badge">88% Complété</div>
+                </div>
+                <div class="course-content">
+                    <div class="course-meta">Niveau L3 • 6 semaines</div>
+                    <h3 class="course-title">Algorithmes Avancés</h3>
+                    <p class="course-professor">Prof. Pierre Laurent</p>
+
+                    <div class="course-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">15/17</div>
+                            <div class="stat-label">Modules</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">51h</div>
+                            <div class="stat-label">Temps</div>
+                        </div>
+                    </div>
+
+                    <div class="course-progress">
+                        <div class="progress-label">
+                            <span>Progression</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 88%"></div>
+                        </div>
+                    </div>
+
+                    <div class="course-footer">
+                        <button class="btn-continue">Continuer</button>
+                        <button class="btn-details">Détails</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="margin-top: var(--spacing-2xl);">
+        <p style="text-align: center; color: var(--text-secondary); font-size: var(--font-size-sm);">
+            LMS développé par NDAOBA MOHAMAT 24G2687
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/ui-utils.js"></script>
+</body>
+</html>

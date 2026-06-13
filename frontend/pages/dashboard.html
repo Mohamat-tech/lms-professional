@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LMS Sophisti qué - Tableau de bord">
+    <meta name="theme-color" content="#0066FF">
+    <title>LMS - Tableau de bord</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dashboard-wrapper {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: var(--spacing-lg) 0;
+            position: sticky;
+            top: 70px;
+            height: calc(100vh - 70px);
+            overflow-y: auto;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md) var(--spacing-lg);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-menu a:hover {
+            background: var(--bg-tertiary);
+            color: var(--primary-blue);
+            border-left-color: var(--primary-blue);
+        }
+
+        .sidebar-menu a.active {
+            background: rgba(0, 102, 255, 0.1);
+            color: var(--primary-blue);
+            border-left-color: var(--primary-blue);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+        }
+
+        .dashboard-header {
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .dashboard-header h1 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .welcome-message {
+            color: var(--text-secondary);
+            font-size: var(--font-size-md);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .stat-card {
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            box-shadow: 0 8px 16px rgba(0, 102, 255, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            width: fit-content;
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            opacity: 0.9;
+        }
+
+        .stat-value {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+        }
+
+        .stat-card.warm {
+            background: var(--gradient-warm);
+        }
+
+        .stat-card.cool {
+            background: var(--gradient-cool);
+        }
+
+        .courses-section {
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .section-header h2 {
+            margin: 0;
+        }
+
+        .view-all {
+            color: var(--primary-blue);
+            font-size: var(--font-size-sm);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .course-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all var(--transition-base);
+            border: 1px solid var(--border-color);
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+        }
+
+        .course-thumbnail {
+            width: 100%;
+            height: 150px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .course-body {
+            padding: var(--spacing-lg);
+        }
+
+        .course-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .course-professor {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .course-progress {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .course-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .course-actions button {
+            flex: 1;
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-size: var(--font-size-sm);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .course-actions .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .course-actions .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                display: none;
+                position: static;
+            }
+
+            .sidebar.active {
+                display: block;
+            }
+
+            .main-content {
+                padding: var(--spacing-md);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container flex">
+            <div class="logo">🎓 LMS Pro</div>
+            <ul class="nav-menu">
+                <li><a href="#dashboard" class="active">Tableau de bord</a></li>
+                <li><a href="#courses">Cours</a></li>
+                <li><a href="#evaluations">Évaluations</a></li>
+            </ul>
+            <button class="theme-toggle">🌙</button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active">📊 Tableau de bord</a></li>
+                <li><a href="#courses">📚 Mes Cours</a></li>
+                <li><a href="#assignments">📝 Devoirs</a></li>
+                <li><a href="#grades">📈 Résultats</a></li>
+                <li><a href="#group-study">👥 Études en Groupe</a></li>
+                <li><a href="#downloads">⬇️ Téléchargements</a></li>
+                <li><a href="#profile">👤 Profil</a></li>
+                <li><a href="#settings">⚙️ Paramètres</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <h1>Bienvenue sur votre Tableau de bord 👋</h1>
+                <p class="welcome-message">Commencez par consulter vos cours et devoirs en attente</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-label">Cours Actifs</div>
+                    <div class="stat-value">5</div>
+                </div>
+                <div class="stat-card warm">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-label">Devoirs à faire</div>
+                    <div class="stat-value">3</div>
+                </div>
+                <div class="stat-card cool">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-label">Moyenne</div>
+                    <div class="stat-value">87%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-label">Badges Obtenus</div>
+                    <div class="stat-value">8</div>
+                </div>
+            </div>
+
+            <!-- Recent Courses -->
+            <section class="courses-section">
+                <div class="section-header">
+                    <h2>Vos Cours Récents</h2>
+                    <a href="#" class="view-all">Voir tous →</a>
+                </div>
+
+                <div class="courses-grid">
+                    <!-- Course Card 1 -->
+                    <div class="course-card">
+                        <div class="course-thumbnail">📖</div>
+                        <div class="course-body">
+                            <div class="course-title">Introduction à Python</div>
+                            <div class="course-professor">Prof. Jean Dupont</div>
+                            <div class="course-progress">
+                                <div class="progress-label">
+                                    <span>Progression</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div class="course-actions">
+                                <button class="btn-primary">Continuer</button>
+                                <button class="btn-secondary">Détails</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 2 -->
+                    <div class="course-card">
+                        <div class="course-thumbnail">💻</div>
+                        <div class="course-body">
+                            <div class="course-title">Développement Web</div>
+                            <div class="course-professor">Prof. Marie Martin</div>
+                            <div class="course-progress">
+                                <div class="progress-label">
+                                    <span>Progression</span>
+                                    <span>42%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 42%"></div>
+                                </div>
+                            </div>
+                            <div class="course-actions">
+                                <button class="btn-primary">Continuer</button>
+                                <button class="btn-secondary">Détails</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Card 3 -->
+                    <div class="course-card">
+                        <div class="course-thumbnail">🎓</div>
+                        <div class="course-body">
+                            <div class="course-title">Algorithmes Avancés</div>
+                            <div class="course-professor">Prof. Pierre Laurent</div>
+                            <div class="course-progress">
+                                <div class="progress-label">
+                                    <span>Progression</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div class="course-actions">
+                                <button class="btn-primary">Continuer</button>
+                                <button class="btn-secondary">Détails</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upcoming Assignments -->
+            <section class="courses-section">
+                <div class="section-header">
+                    <h2>Devoirs à faire</h2>
+                    <a href="#" class="view-all">Voir tous →</a>
+                </div>
+
+                <div style="background: var(--bg-secondary); border-radius: var(--radius-lg); padding: var(--spacing-lg);">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: var(--spacing-md); text-align: left; color: var(--text-secondary);">Devoir</th>
+                                <th style="padding: var(--spacing-md); text-align: left; color: var(--text-secondary);">Cours</th>
+                                <th style="padding: var(--spacing-md); text-align: left; color: var(--text-secondary);">Échéance</th>
+                                <th style="padding: var(--spacing-md); text-align: left; color: var(--text-secondary);">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: var(--spacing-md);">TP 1: Variables et Boucles</td>
+                                <td style="padding: var(--spacing-md);">Python</td>
+                                <td style="padding: var(--spacing-md);">15 Juin 2026</td>
+                                <td style="padding: var(--spacing-md);"><a href="#" style="color: var(--primary-blue);">Soumettre</a></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <td style="padding: var(--spacing-md);">Projet Website</td>
+                                <td style="padding: var(--spacing-md);">Web</td>
+                                <td style="padding: var(--spacing-md);">22 Juin 2026</td>
+                                <td style="padding: var(--spacing-md);"><a href="#" style="color: var(--primary-blue);">Soumettre</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Footer Credit -->
+            <div style="text-align: center; margin-top: var(--spacing-2xl); padding-top: var(--spacing-lg); border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: var(--font-size-sm);">
+                LMS développé par NDAOBA MOHAMAT 24G2687
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/ui-utils.js"></script>
+</body>
+</html>

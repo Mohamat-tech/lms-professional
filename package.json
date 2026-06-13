@@ -1,0 +1,41 @@
+{
+  "name": "lms-professional",
+  "version": "1.0.0",
+  "description": "Platform d'apprentissage en ligne sophi stiquée avec design iOS26 et thème jour/nuit",
+  "main": "backend/index.php",
+  "scripts": {
+    "start": "php -S localhost:8000 -t backend",
+    "dev": "php -S localhost:8000 -t backend",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install && echo 'Build complete'",
+    "deploy:vercel": "vercel deploy",
+    "deploy:render": "git push render main"
+  },
+  "keywords": [
+    "lms",
+    "education",
+    "learning",
+    "platform",
+    "courses",
+    "students",
+    "teachers"
+  ],
+  "author": "NDAOBA MOHAMAT 24G2687",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndaoba/lms-professional.git"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "php": ">=8.0"
+  },
+  "dependencies": {
+    "chart.js": "^3.9.1",
+    "axios": "^1.4.0"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0",
+    "http-server": "^14.1.1"
+  }
+}

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LMS Professionnel - Plateforme d'apprentissage sophisti quée">
+    <meta name="theme-color" content="#0066FF">
+    <title>LMS Professionnel - Accueil</title>
+
+    <link rel="stylesheet" href="frontend/assets/css/theme.css">
+    <link rel="stylesheet" href="frontend/assets/css/main.css">
+    <link rel="stylesheet" href="frontend/assets/css/components.css">
+    <link rel="stylesheet" href="frontend/assets/css/responsive.css">
+
+    <style>
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-sky));
+            color: white;
+            text-align: center;
+            padding: var(--spacing-2xl);
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-2xl);
+            opacity: 0.95;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: var(--spacing-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: var(--spacing-md) var(--spacing-2xl);
+            font-size: 1rem;
+            font-weight: 600;
+            border: 2px solid white;
+            border-radius: var(--radius-lg);
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-hero:hover {
+            background: white;
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-hero.primary {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        .btn-hero.primary:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .features {
+            padding: var(--spacing-2xl);
+            background: var(--bg-primary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-2xl);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all var(--transition-base);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .feature-card h3 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .cta-section {
+            padding: var(--spacing-2xl);
+            background: var(--gradient-warm);
+            color: white;
+            text-align: center;
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-2xl);
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-2xl);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            padding: var(--spacing-2xl);
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 767px) {
+            .hero {
+                min-height: auto;
+                padding: var(--spacing-lg);
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .btn-hero {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container flex">
+            <div class="logo">🎓 LMS Pro</div>
+            <ul class="nav-menu">
+                <li><a href="#features">Fonctionnalités</a></li>
+                <li><a href="#stats">Statistiques</a></li>
+                <li><a href="frontend/pages/login.html" class="btn btn-primary btn-sm">Connexion</a></li>
+            </ul>
+            <button class="theme-toggle">🌙</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content animate-in">
+            <div class="hero-icon">✨</div>
+            <h1>LMS Professionnel</h1>
+            <p>Plateforme d'apprentissage innovante avec design moderne, thème jour/nuit, IA intégrée et fonctionnalités avancées</p>
+            <div class="hero-actions">
+                <a href="frontend/pages/signup.html" class="btn-hero primary">S'inscrire Maintenant</a>
+                <a href="frontend/pages/login.html" class="btn-hero">Se Connecter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-xl);">Fonctionnalités Principales</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Gestion des Cours</h3>
+                    <p>Créez, gérez et organisez vos cours avec ressources multimédias</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Devoirs & Évaluation</h3>
+                    <p>Système complet d'évaluation avec correction IA automatisée</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Analytique Avancée</h3>
+                    <p>Graphiques de progression et suivi des compétences en temps réel</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎥</div>
+                    <h3>Sessions Live</h3>
+                    <p>Streaming interactif avec micro, caméra et chat en direct</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Études en Groupe</h3>
+                    <p>Organisations sessions de travail collaboratif entre étudiants</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Design Moderne</h3>
+                    <p>Interface inspirée par iOS26 avec thème jour/nuit dynamique</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Sécurité</h3>
+                    <p>JWT authentification, encryption des données, conformité RGPD</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Responsive Design</h3>
+                    <p>Fonctionne parfaitement sur desktop, tablet et mobile</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section style="background: var(--bg-secondary); padding: var(--spacing-2xl);" id="stats">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-xl);">Statistiques</h2>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Utilisateurs</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Cours</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Devoirs Corrigés</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container">
+        <div class="cta-section">
+            <h2>Rejoignez Notre Communauté</h2>
+            <p>Commencez votre parcours d'apprentissage dès aujourd'hui</p>
+            <a href="frontend/pages/signup.html" class="btn-hero primary">Créer un Compte Gratuitement</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 LMS Professionnel. Développé par NDAOBA MOHAMAT 24G2687</p>
+        <p style="font-size: var(--font-size-sm); margin-top: var(--spacing-md);">
+            Tous droits réservés | <a href="#" style="color: var(--primary-blue);">Privacy</a> | <a href="#" style="color: var(--primary-blue);">Terms</a>
+        </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="frontend/assets/js/app.js"></script>
+    <script src="frontend/assets/js/ui-utils.js"></script>
+</body>
+</html>
