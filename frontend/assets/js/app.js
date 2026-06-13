@@ -79,7 +79,7 @@ class LMSApp {
 
   async login(email, password) {
     try {
-      const response = await fetch('/backend/api/auth.php', {
+      const response = await fetch('https://lms-professional.onrender.com/backend/api/auth.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'login', email, password })
@@ -107,7 +107,7 @@ class LMSApp {
 
   async signup(userData) {
     try {
-      const response = await fetch('/backend/api/auth.php', {
+      const response = await fetch('https://lms-professional.onrender.com/backend/api/auth.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'signup', ...userData })
